@@ -5,16 +5,18 @@ buttonConectar.onclick = function () {
 }
 
 function connectHost () {
-  const host = document.querySelector('input[name="host"]')
-  const user = document.querySelector('input[name="user"]')
-  const password = document.querySelector('input[name="password"]')
-  const port = document.querySelector('input[name="port"]')
+    const host = document.getElementById('host').value;
+    const user = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const port = document.getElementById('port').value;
 
-  const conexao = {
-    ip: host.value,
-    usuario: user.value,
-    senha: password.value,
-    porta: port.value
+
+    const conexao = {
+
+        ip: host,
+        usuario: user,
+        senha: password,
+        porta: port,
   }
 
   console.log(conexao)
