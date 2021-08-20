@@ -1,14 +1,11 @@
-#entrada {
-    vertical-align: middle;
-    border-right: 1px ridge;
-    border-left: 1px ridge;
-
-}
-
 #corpo {
   width: 100vw;
   height: 100vw;
 }
+
+#port {
+    width: 50px;
+  }
 
 .card-header {
     background-image: linear-gradient(135deg, #e0ffa7 0, #cdffac 8.33%, #b9ffb1 16.67%, #a5feb5 25%, #91f4b7 33.33%, #7ee7b7 41.67%, #6cd8b4 50%, #5dc9b0 58.33%, #52bcac 66.67%, #4ab0a9 75%, #44a6a6 83.33%, #429fa4 91.67%, #4199a4 100%);
