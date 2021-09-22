@@ -14,58 +14,70 @@
 
 <body>
   <header class="card-header">
-        <img src="./Imagem/logo.png" alt="logo da empresa" id="logo">
+    <img src="./Imagem/logo.png" alt="logo da empresa" id="logo">
   </header>
+
   <div class="container" id="corpo">
-    <div class="card-body" class="grid">
+    <div class="card-body text-center grid" id="input">
       <label for="host">Host:</label>
-      <input type="text" id="host" class="g-col-6" placeholder="0.0.0.0"
+      <input type="text" id="host" autocomplete="off" class="g-col-6" placeholder="0.0.0.0"
         pattern="^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
         required autofocus>
-      <label for="username">Usuário:</label>
-      <input type="text" id="username" class="g-col-6" placeholder="Usuário" required>
-      <label for="password">@</label>
-      <input type="password" id="password" class="g-col-6" placeholder="Senha" required>
+      <label for="username">@</label>
+      <input type="text" id="username" autocomplete="off" class="g-col-6" placeholder="Usuário" required>
+      <label for="password">Senha:</label>
+      <input type="password" id="password" autocomplete="off" class="g-col-6" placeholder="Senha" required>
       <label for="port">Porta:</label>
-      <input type="text" id="port" class="g-col-6" placeholder="22" required>
-      <button title="Conectar" type="button" class="btn btn-outline-dark" id="conectar"><i
+      <input type="text" id="port" autocomplete="off" class="g-col-6" placeholder="22" required>
+      <button title="Conectar" type="button" class="btn btn-outline-secondary" id="conectar"><i
           class="fas fa-link"></i></button>
+      <button title="Desconectar" type="button" class="btn btn-outline-secondary" id="desconectar"><i
+          class="fas fa-sign-out-alt"></i></button>
     </div>
+
     <div class="row">
-      <div class="col">
-        <div class="card">
+      <div class="col-12 col-md-4" id="col">
+        <div class="card mt-4">
           <div class="card-header" id="colunasHost">
             <h5 class="card-title text-center">
               Host Local
             </h5>
           </div>
-          <div class="card-body" style="height: 400px">
-            corpo coluna1
+          <div class="card-body" id="btable">
+            <table class="table" id="local">
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card">
+      <div class="col-12 col-md-4">
+        <div class="card mt-4">
           <div class="card-header" id="colunasHost">
             <h5 class="card-title text-center">
-              Host Remoto
+              Servidor
             </h5>
           </div>
-          <div class="card-body" style="height: 400px">
-            corpo coluna2
+          <div class="card-body" id="btable">
+            <table class="table" id="remoto">
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <footer class="text-center" style="vertical-align: baseline;">
-    <p>&copy;Copyright</p>
+
+  <footer class="text-center">
+    <p>&copy;Copyright IFPB</p>
   </footer>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-    crossorigin="anonymous"></script>
-  <script src="script.js"></script>
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+    </script>
+  <script src="js/script.js" type="module"></script>
 </body>
 
 </html>
