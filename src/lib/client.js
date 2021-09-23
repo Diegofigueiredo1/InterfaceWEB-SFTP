@@ -4,8 +4,8 @@ let sftp = new Client();
 const config = {
     host: `127.0.0.1`,
     port: `22`,
-    username: `jefferson`,
-    password: `98635`
+    username: `user`,
+    password: `00000`
 }
 
 async function getDir(path) {
