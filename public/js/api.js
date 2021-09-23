@@ -1,4 +1,4 @@
-const domain = '';
+const domain = 'http://localhost:3000';
 
 
 async function read(resource) {
