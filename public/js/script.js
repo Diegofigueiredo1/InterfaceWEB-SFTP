@@ -6,6 +6,7 @@ const configlocal = {
   username: 'aluno',
   password: 'ifpb'
 }
+
 let configremote = {};
 
 let acc = 0;
@@ -19,8 +20,6 @@ buttonConectar.onclick = function () {
     document.getElementById('password').value='';
     document.getElementById('port').value='';
     if (acc < 1) {
-      load('/home/diego/', configremote);
-      loadlocal('/home/aluno/', configlocal);
       acc +=1
       
     }
@@ -39,7 +38,7 @@ buttonDesconectar.onclick = function () {
     }
 }
 
-function autenticar () {
+async function autenticar () {
     const host = document.getElementById('host').value;
     const user = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -51,78 +50,33 @@ function autenticar () {
       password,
       port
     }
+
     if (host === '' || user === '' || password === '' || port === '') {
       return false
     } else {
+      await load('/home/aluno/', configlocal);
+      await load(`/home/${user}/`, configremote);
       return true
     }
   }
 
 
-async function load(path) {
-  const list = await api.read('sftp', path,configremote);
-  getDirFileServer(list);
 
-}
-
-/*
 async function execDownload(id) {
   const valor = document.getElementById(id);
   loadSpinner(valor);
-  const servidor = await api.read('Servidor');
   const hostlocal = document.querySelector('#local tbody');
-  let rowLocal;
-  for (const direct of servidor) {
-    if (id == direct.id){
-      if (direct.type === 'd') {
-        rowLocal = `
+  let rowlocal;
+  rowlocal = `
         <tr>
-          <td><i class="fas fa-folder"></i> ${direct.name}</td>
+          <td><i class="fas fa-file-pdf"></i> ${id}</td>
         </tr>`;
-      } else {
-        rowLocal = `
-        <tr>
-          <td><i class="fas fa-file-pdf"></i> ${direct.name}</td>
-        </tr>`;
-      }
+  hostlocal.insertAdjacentHTML('beforeend', rowlocal);
+  setTimeout(() => {
+    hideSpinner(valor);
+  }, 2000);
   
-    }
-  }
-  hostlocal.insertAdjacentHTML('beforeend', rowLocal);  
-  hideSpinner(valor);
-}
-*/
-function getDirFileServer(direct) {
-  let arrayfiles = [];
-  let arraydirs = [];
-
-  for (const dir of direct) {
-    const {name, type, id} = dir;
-
-    let row;
-    if (type === 'd') {
-      row = `
-      <tr>
-        <td><i class="fas fa-folder"></i> ${name}</td>
-      </tr>`;
-      arraydirs.push(row)
-    }  else {
-      row = `
-      <tr>
-        <td><i class="fas fa-file-pdf"></i> ${name} 
-        <i class="fas fa-file-download float-end pt-1" onclick="execDownload('${id}')" ></i><div id="${id}" class="spinner-border spinner-border-sm invisible float-end pt-2" role="status">
-            <span class="sr-only">Loading...</span>
-          </div> </td>
-      </tr>`;
-      arrayfiles.push(row)
-    }
-
-  }
   
-  let path = '#remoto tbody'
-  setDir(arraydirs, path);
-  setDir(arrayfiles, path);
-
 }
 
 
@@ -130,54 +84,96 @@ function setDir (array, path) {
   for (let dirr of array){
     let row = dirr
     const tbody = document.querySelector(path);
-
     tbody.insertAdjacentHTML('beforeend', row);
     
   }
 }
 
-
-////////////// local ///////
-async function loadlocal(path,config) {
-  
+async function load(path,config) {
   const list = await api.read('sftp', path,config);
-  getDirFileLocal(list);
+  loadAll(list, config);
 }
 
-function getDirFileLocal(directlocal) {
-  let arrayfilel = [];
-  let arraydirl = [];
-  for (const dirlocal of directlocal) {
-    const {name, type} = dirlocal;
-    
-    let rowlocal;
-    if (type === 'd') {
-      rowlocal = `
-      <tr>
-        <td><i class="fas fa-folder"></i> ${name}</td>
-      </tr>`;
-      arraydirl.push(rowlocal);
-    }  else {
-      rowlocal = `
-      <tr>
-        <td><i class="fas fa-file-pdf"></i> ${name}</td>
-      </tr>`;
-      arrayfilel.push(rowlocal);
+function loadAll(listJson, config) {
+  let arrayfile = [];
+  let arraydir = [];
+  let { host } = config
+  if (host === '127.0.0.1') {
+    for (const dirFiles of listJson) {
+      const {name, type} = dirFiles;
+      let rowlocal;
+      if (name[0] !== '.') {
+        if (type === 'd') {
+        rowlocal = `
+        <tr>
+          <td><i class="fas fa-folder"></i> ${name}</td>
+        </tr>`;
+        arraydir.push(rowlocal);
+      }  else {
+        rowlocal = `
+        <tr>
+          <td><i class="fas fa-file-pdf"></i> ${name}</td>
+        </tr>`;
+        arrayfile.push(rowlocal);
+      }
+      }
+      
+
     }
+    let path = '#local tbody'
+    setDir(arraydir, path);
+    setDir(arrayfile, path);
+      
+    } else {
+      for (const dirFiles of listJson) {
+        const {name, type} = dirFiles;
+        let row;
+        if (name[0] !== '.'){
+          if (type === 'd') {
+          row = `
+          <tr>
+            <td><i class="fas fa-folder"></i> ${name}</td>
+          </tr>`;
+          arraydir.push(row)
+        }  else {
+          row = `
+          <tr>
+            <td><i class="fas fa-file-pdf"></i> ${name} 
+            <i class="fas fa-file-download float-end pt-1" onclick="execDownload('${name}')"></i><div id="${name}" class="spinner-border spinner-border-sm invisible float-end pt-2" role="status">
+                <span class="sr-only">Loading...</span>
+              </div> </td>
+          </tr>`;
+          arrayfile.push(row)
+        }
 
+        }
+        
   }
-  let path = '#local tbody'
-  setDir(arraydirl, path);
-  setDir(arrayfilel, path);
+  
+  let path = '#remoto tbody'
+  setDir(arraydir, path);
+  setDir(arrayfile, path);
 
+    }
 }
+
 
 function loadSpinner(valor) {
   valor.classList.remove("invisible");
 }
 
+
 function hideSpinner(valor){
   valor.classList.add("invisible");
+}
+
+function sleep(miliseconds){
+  const start = new Date().getTime();
+  for (let i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > miliseconds){
+      break;
+    }
+  }
 }
 
 window.execDownload = execDownload;
