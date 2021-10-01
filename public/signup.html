@@ -10,6 +10,7 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
+    <link href="./css/style.css" rel="stylesheet">
 
     <title>Cadastro</title>
   </head>
@@ -42,14 +43,14 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="card container mt-5">
       <h1 class="text-center">Cadastro</h1>
 
       <div class="row justify-content-md-center">
         <div class="col-6">
           <form class="mt-5">
             <div class="mb-3">
-              <label for="name" class="form-label">Nome</label>
+              <label for="name" class="form-label"><i>Nome:</i></label>
               <input
                 type="text"
                 class="form-control"
@@ -59,7 +60,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label"><i>Email:</i></label>
               <input
                 type="email"
                 class="form-control"
@@ -69,7 +70,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Senha</label>
+              <label for="password" class="form-label"><i>Senha:</i></label>
               <input
                 type="password"
                 class="form-control"
@@ -80,7 +81,7 @@
             </div>
             <div class="mb-3">
               <label for="passwordConfirmation" class="form-label"
-                >Confirmar Senha</label
+                ><i>Confirmar Senha:</i></label
               >
               <input
                 type="password"
@@ -94,7 +95,7 @@
               <input
                 type="submit"
                 value="Cadastrar"
-                class="btn btn-primary float-end"
+                class="btn btn-primary float-end mb-2"
               />
             </div>
           </form>
