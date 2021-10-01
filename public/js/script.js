@@ -3,8 +3,8 @@ import api from './services/api.js';
 const configlocal = {
   host: '127.0.0.1',
   port: '22',
-  username: 'userlocal',
-  password: '*****'
+  username: 'aluno',
+  password: 'ifpb'
 }
 
 let configremote = {};
@@ -14,51 +14,51 @@ const buttonConectar = document.querySelector('#conectar')
 const buttonDesconectar = document.querySelector('#desconectar')
 
 buttonConectar.onclick = function () {
-  if (autenticar()) {
-    document.getElementById('host').value = '';
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
-    document.getElementById('port').value = '';
+  if (authenticate()) {
+    document.getElementById('host').value='';
+    document.getElementById('username').value='';
+    document.getElementById('password').value='';
+    document.getElementById('port').value='';
     if (acc < 1) {
-      acc += 1
-
+      acc +=1
+      
     }
   } else {
-    swal("ERRO", "Falha ao se conectar!", "error")
+    swal ( "ERRO" ,  "Falha ao se conectar!" ,  "error" )
   }
-
+  
 }
 
 buttonDesconectar.onclick = function () {
-  if (acc == 1) {
+  
     document.querySelector('#remoto tbody').innerHTML = '';
     document.querySelector('#local tbody').innerHTML = '';
     acc = 0
-    swal("Desconectado", ' ', "success")
-  }
+    window.location.href = "/public/signin.html"
+
 }
 
-async function autenticar() {
-  const host = document.getElementById('host').value;
-  const user = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const port = document.getElementById('port').value;
+async function authenticate () {
+    const host = document.getElementById('host').value;
+    const user = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const port = document.getElementById('port').value;
+    
+    configremote = {
+      host,
+      user,
+      password,
+      port
+    }
 
-  configremote = {
-    host,
-    user,
-    password,
-    port
+    if (host === '' || user === '' || password === '' || port === '') {
+      return false
+    } else {
+      await load('/home/aluno/', configlocal);
+      await load(`/home/${user}/`, configremote);
+      return true
+    }
   }
-
-  if (host === '' || user === '' || password === '' || port === '') {
-    return false
-  } else {
-    await load('/home/userlocal/', configlocal);
-    await load(`/home/${user}/`, configremote);
-    return true
-  }
-}
 
 
 
@@ -75,22 +75,22 @@ async function execDownload(id) {
   setTimeout(() => {
     hideSpinner(valor);
   }, 2000);
-
-
+  
+  
 }
 
 
-function setDir(array, path) {
-  for (let dirr of array) {
+function setDir (array, path) {
+  for (let dirr of array){
     let row = dirr
     const tbody = document.querySelector(path);
     tbody.insertAdjacentHTML('beforeend', row);
-
+    
   }
 }
 
-async function load(path, config) {
-  const list = await api.read('sftp', path, config);
+async function load(path,config) {
+  const list = await api.read('sftp', path,config);
   loadAll(list, config);
 }
 
@@ -100,42 +100,42 @@ function loadAll(listJson, config) {
   let { host } = config
   if (host === '127.0.0.1') {
     for (const dirFiles of listJson) {
-      const { name, type } = dirFiles;
+      const {name, type} = dirFiles;
       let rowlocal;
       if (name[0] !== '.') {
         if (type === 'd') {
-          rowlocal = `
+        rowlocal = `
         <tr>
           <td><i class="fas fa-folder"></i> ${name}</td>
         </tr>`;
-          arraydir.push(rowlocal);
-        } else {
-          rowlocal = `
+        arraydir.push(rowlocal);
+      }  else {
+        rowlocal = `
         <tr>
           <td><i class="fas fa-file-pdf"></i> ${name}</td>
         </tr>`;
-          arrayfile.push(rowlocal);
-        }
+        arrayfile.push(rowlocal);
       }
-
+      }
+      
 
     }
     let path = '#local tbody'
     setDir(arraydir, path);
     setDir(arrayfile, path);
-
-  } else {
-    for (const dirFiles of listJson) {
-      const { name, type } = dirFiles;
-      let row;
-      if (name[0] !== '.') {
-        if (type === 'd') {
+      
+    } else {
+      for (const dirFiles of listJson) {
+        const {name, type} = dirFiles;
+        let row;
+        if (name[0] !== '.'){
+          if (type === 'd') {
           row = `
           <tr>
             <td><i class="fas fa-folder"></i> ${name}</td>
           </tr>`;
           arraydir.push(row)
-        } else {
+        }  else {
           row = `
           <tr>
             <td><i class="fas fa-file-pdf"></i> ${name} 
@@ -146,15 +146,15 @@ function loadAll(listJson, config) {
           arrayfile.push(row)
         }
 
-      }
+        }
+        
+  }
+  
+  let path = '#remoto tbody'
+  setDir(arraydir, path);
+  setDir(arrayfile, path);
 
     }
-
-    let path = '#remoto tbody'
-    setDir(arraydir, path);
-    setDir(arrayfile, path);
-
-  }
 }
 
 
@@ -163,17 +163,9 @@ function loadSpinner(valor) {
 }
 
 
-function hideSpinner(valor) {
+function hideSpinner(valor){
   valor.classList.add("invisible");
 }
 
-function sleep(miliseconds) {
-  const start = new Date().getTime();
-  for (let i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > miliseconds) {
-      break;
-    }
-  }
-}
 
 window.execDownload = execDownload;

@@ -1,0 +1,14 @@
+### read files
+
+POST http://localhost:3000/sftp
+Content-Type: application/json
+
+{
+    "config": {
+        "host": "192.168.1.5",
+        "port": "22",
+        "username": "diego",
+        "password": "ifpb"
+    },
+    "path": "/home/diego/"
+}

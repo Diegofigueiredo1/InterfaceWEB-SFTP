@@ -3,7 +3,7 @@ import path from "path";
 import Database from "sqlite-async";
 
 import Seed from "./seeders.js";
-import Migration from "./migrations.js";
+import Migration from "./migration.js";
 
 const databaseFile = path.resolve("src", "db", "database.sqlite");
 

@@ -1,91 +1,91 @@
 #corpo {
-    width: 100vw;
-    height: auto;
-    background-repeat: no-repeat;
-    background-size: 100px 100px;
-    background-position: center center; 
+  width: 100vw;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-position: center center; 
+}
+
+#port {
+    width: 50px;
   }
-  
-  #port {
-      width: 50px;
-    }
-  
-  .card-header {
-      /*background-image: linear-gradient(135deg, #e0ffa7 0, #cdffac 8.33%, #b9ffb1 16.67%, #a5feb5 25%, #91f4b7 33.33%, #7ee7b7 41.67%, #6cd8b4 50%, #5dc9b0 58.33%, #52bcac 66.67%, #4ab0a9 75%, #44a6a6 83.33%, #429fa4 91.67%, #4199a4 100%);*/
-      background-image: linear-gradient(to right, #80D8FA, #71DCDE,#8AF5D8,#71DEA2, #80FA94);
-  }
-  
-  
-  #input {
-      text-align: center;
-      color:white;
-  }
-  
-  input {
-    text-align: center
-  }
-  
-  
-  button {
-      transform: translateY(-2px);
-      margin-left: 5px;
-  
-  }
-  
-  footer {
-      font-weight: bold;
-      font-style: italic;
-      color: white;
-      vertical-align: baseline;
-  
-  }
-  
-  #logo {
-      width: 75px;
-      height: 75px;
-      display: block;
-      margin-left: auto;
-  
-  }    
-  
-  body {
-  
-      background-image: url(./Imagem/17266.jpg);
-  }
-  
-  #btable {
-    height: 400px;
-    overflow-y: auto;
-  }
-  
-  .fa-link {
+
+.card-header {
+    /*background-image: linear-gradient(135deg, #e0ffa7 0, #cdffac 8.33%, #b9ffb1 16.67%, #a5feb5 25%, #91f4b7 33.33%, #7ee7b7 41.67%, #6cd8b4 50%, #5dc9b0 58.33%, #52bcac 66.67%, #4ab0a9 75%, #44a6a6 83.33%, #429fa4 91.67%, #4199a4 100%);*/
+    background-image: linear-gradient(to right, #80D8FA, #71DCDE,#8AF5D8,#71DEA2, #80FA94);
+}
+
+
+#input {
+    text-align: center;
+    color:white;
+}
+
+input {
+  text-align: center
+}
+
+
+button {
+    transform: translateY(-2px);
+    margin-left: 5px;
+
+}
+
+footer {
+    font-weight: bold;
+    font-style: italic;
     color: white;
+    vertical-align: baseline;
+
+}
+
+#logo {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin-left: auto;
+
+}    
+
+body {
+
+    background-image: url(./Imagem/17266.jpg);
+}
+
+#btable {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.fa-link {
+  color: white;
+}
+
+#col {
+  margin-left: 14em;
   }
-  
-  #col {
-    margin-left: 14em;
-    }
-  
-  .fa-folder:hover {
-    cursor: pointer;
-  }
-  
-  .fa-file-pdf:hover {
-    cursor: pointer;
-  }
-  
-  .fa-sign-out-alt {
-    color: white;
-  }
-  
-  .fa-file-download:hover {
-    cursor: pointer;
-  }
-  
-  .spinner-border-sm {
-    margin: 5px;
-  }
-  
-  .card-border {
-    height: 21rem;
-  }
+
+.fa-folder:hover {
+  cursor: pointer;
+}
+
+.fa-file-pdf:hover {
+  cursor: pointer;
+}
+
+.fa-sign-out-alt {
+  color: white;
+}
+
+.fa-file-download:hover {
+  cursor: pointer;
+}
+
+.spinner-border-sm {
+  margin: 5px;
+}
+
+.card-border {
+  height: 21rem;
+}

@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import User from "../models/User.js";
+import User from "../models/Users.js";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -10,7 +10,6 @@ function up() {
   const content = fs.readFileSync(filename);
 
   const seeders = JSON.parse(content);
-
 
   for (const user of seeders.users) {
     User.load(user);
